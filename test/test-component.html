@@ -1,0 +1,12 @@
+<template id="test-template">
+    <h1>Hey</h1>
+</template>
+
+<script>
+    Component.init({
+        tag: "test-component",
+        template: "#test-template",
+        before: () => console.log("created"),        
+        after: () => console.log("rendered"),
+    });
+</script>
