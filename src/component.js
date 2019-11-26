@@ -1,35 +1,31 @@
 class Component extends HTMLElement {
-    constructor(template = "", currentScript, actions, events) {
+    constructor(template = "", actions, events) {
         super();
 
-        this.parentDocument = currentScript.ownerDocument;
-
-        this.templateSelector = template == "" ? "template" : `template${template}`;
+        this.template = template;
         this.actions = actions;
         this.events = events;
     }
 
-    render() {
-        let template = this.parentDocument.querySelector(this.templateSelector);
-        let element = template.content.cloneNode(true);
-        
-        this.attachShadow({mode: 'open'});
-	    this.shadowRoot.appendChild(element);
+    get host() {
+        return this;
+    }
+
+    render() {        
+        if (!this.shadowRoot) this.attachShadow({mode: 'open'});
+        this.shadowRoot.innerHTML = this.template;
     }
 
     connectedCallback() { 
         this.render();
-        this.events.before(); 
+        this.events.before(this); 
     }
 
     disconnectedCallback() { this.events.after(); }
     attributesChangedCallback(a, o, v) { this.events.deleted(a, o, v); }
 
-    static load(uri) {
-        return fetch(uri).then(raw => raw.text());
-    }
-
-    static init({
+    static create({
+        tag,
         template,
         actions = {},
         before = () => {}, 
@@ -38,12 +34,10 @@ class Component extends HTMLElement {
     }) {
         if (!tag || tag === "") throw "component tag must be provided";
 
-        const currentScript = document.currentScript;
         window.customElements.define(tag, class extends Component {
             constructor() { 
                 super(
                     template,
-                    currentScript, 
                     actions, 
                     { before, after, deleted }
                 ); 

@@ -6,15 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
   	<body>
-		<test-component></test-component>
+		<test-component id="elementId"></test-component>
+		<test-component2></test-component2>
 
 		<script type="module">
-			import Component from '../dist/component.js';
-
-			Component.load('./test-component.html')
-				.then(component => {
-					console.log(component);
-				});
+			import './test-component.js';
+			import './test-component2.js';
 		</script>
   	</body>
 </html>

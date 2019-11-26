@@ -2,11 +2,13 @@
 	"name": "component.js",
 	"version": "0.0.1",
 	"description": "simple Web Components library",
-	"main": "dist/component.js",
+	"main": "dist/component.cjs.js",
+	"module": "dist/component.esm.js",
+	"browser": "dist/component.umd.js",
 	"scripts": {
-		"dev": "webpack --watch --config build/webpack.config.js",
-		"start": "npm run dev",
-		"build": "webpack --mode production --config build/webpack.config.js"
+		"build": "rollup -c build/rollup.config.js",
+		"dev": "rollup -w -c build/rollup.config.js",
+		"start": "npm run dev"
 	},
 	"repository": {
 		"type": "git",
@@ -15,13 +17,9 @@
 	"author": "Lucas Menendez",
 	"license": "MIT",
 	"devDependencies": {
-		"@babel/cli": "^7.6.4",
-		"@babel/core": "^7.6.4",
-		"@babel/preset-env": "^7.6.3",
-		"babel-loader": "^8.0.6",
-		"uglifyjs-webpack-plugin": "^2.2.0",
-		"webpack": "^4.41.2",
-		"webpack-cli": "^3.3.9",
-		"webpack-dev-server": "^3.9.0"
-	}
+		"rollup": "^1.27.5",
+		"rollup-plugin-commonjs": "^10.1.0",
+		"rollup-plugin-node-resolve": "^5.2.0"
+	},
+	"dependencies": {}
 }
