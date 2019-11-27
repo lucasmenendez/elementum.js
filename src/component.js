@@ -5,90 +5,96 @@
  * @property  {Object} actions - User functions to use into the new component.
  * @property  {Object} events - User callbacks for events (created, rendered & deleted).
  */
-class Component extends HTMLElement {
-    /**
-     * @constructor
-     * @param  {string} template - The HTML template for the new component.
-     * @param  {Object} [actions] - events - Common events callbacks (connected, disconnected & attributesChanged).
-     * @param  {Object} [events] - User callbacks for events (created, rendered & deleted).
-     * @param  {Function} [events.created] - User callback to fire when the new component is created.
-     * @param  {Function} [events.rendered] - User callback to fire when the new component is rendered.
-     * @param  {Function} [events.deleted] - User callback to fire when the new component is deleted.
-     */
-    constructor(template, actions, events) {
+class Element extends HTMLElement {
+    constructor() {
         super();
 
-        this.template = template;
-        this.actions = actions;
-        this.events = events;
+        let data = this.__invoke('inject');
+        if (data) {
+            this.__data = data;
+            this.__proxy = new Proxy(this.__data, {
+                set: (target, prop, val) => {
+                    target[prop] = val;
+                    this.__render();
+                    return true;
+                }
+            })
+        }
     }
 
-    /**
-     * Host element getter function.
-     * @returns  {HTMLElement} The host element where current component is attached.
-     */
-    get host() {
-        return this;
+    get data() {
+        return this.__proxy;
+    }
+
+    set data(val) {
+        this.__data = val;
+        this.__render(); 
     }
 
     /**
      * Render function creates the shadowRoot, if not exists, and attaches the template.
      */
-    render() {
+    __render() {
         if (!this.shadowRoot) this.attachShadow({mode: 'open'});
-        this.shadowRoot.innerHTML = this.template;
+        this.shadowRoot.innerHTML = "";
+
+        let styles = this.__invoke('styles');
+        if (styles) {
+            let style = document.createElement('style');
+            style.innerHTML = styles;
+            
+            this.shadowRoot.appendChild(style);
+        }
+
+        let template = this.__invoke('template');
+        if (template) {
+            let body = document.createElement('body');
+            body.innerHTML = template;
+
+            this.shadowRoot.appendChild(body.firstChild);
+        }
+    }
+
+    /**
+     * 
+     */
+    __invoke(name) {
+        return typeof this[name] === 'function' ? this[name]() : null;
     }
     
     /**
      * Callback function for connected event. It fires user callback 'created', render function and fires user callback 'rendered', attaching host element.
      */
     connectedCallback() {
-        this.events.created(this.host); 
-        this.render();
-        this.events.rendered(this.host);
+        this.__invoke('created'); 
+        this.__render();
+        this.__invoke('rendered'); 
     }
     
     /**
      * Callback function for disconnected event. It fires user callback 'deleted'.
      */
     disconnectedCallback() {
-        this.events.deleted(this.host);
+        this.__invoke('rendered');
     }
-    
-    /**
-     * 
-     * @param  {Object} options - Set of configurations to initialize a new component.
-     * @param  {string} options.tag - The new component HTML tag name.
-     * @param  {Object} [options.actions] - User functions to use into the new component.
-     * @param  {Function} [option.created] - User callback to fire when the new component is created.
-     * @param  {Function} [option.rendered] - User callback to fire when the new component is rendered.
-     * @param  {Function} [option.deleted] - User callback to fire when the new component is deleted.
-     */
-    static create({
-        tag,
-        template,
-        actions = {},
-        created = () => {}, 
-        rendered = () => {},
-        deleted = () => {}
-    }) {
-        if (!tag || tag === "") throw "component tag must be provided";
-        if (!template || template === "") throw "component template must be provided";
 
-        window.customElements.define(tag, class extends Component {
-            constructor() { 
-                super(
-                    template,
-                    actions, 
-                    { created, rendered, deleted }
-                ); 
-            }
-
-            connectedCallback() { super.connectedCallback(); }
-            disconnectedCallback() { super.disconnectedCallback(); }
-            attributesChangedCallback(a, o, v) { super.attributesChangedCallback(a, o, v); }
-        });
+    attributeChangedCallback(attr, old, current) {
+        console.log(attr, old, current);
     }
 }
 
-export default Component;
+/**
+ * 
+ * @param  {string} tag - The new component HTML tag name.
+ * @param  {Object} element - User functions to use into the new component.
+ */
+function create(tag, element) {
+    if (!tag || tag === "") throw "component tag must be provided";
+
+    window.customElements.define(tag, element);
+}
+
+export default {
+    Element,
+    create
+};
