@@ -12,12 +12,11 @@ Component.create({
         <h1>Hey</h1>
     `,
     actions: {
-        cheers() {
-            console.log("Hello!!");
+        cheers(self) {
+            console.log(self.host);
         }
     },
-    before(self) {
-        self.actions.cheers();
-        console.log(self.host);
+    rendered(self) {
+        self.actions.cheers(self);
     }
 });
