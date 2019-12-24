@@ -1,28 +1,20 @@
 import Component from '../dist/component.esm.js';
 
-Component.create("test-component", class extends Component.Element{
-    inject() {
+Component.attach("test-component", class extends Component {
+    data() {
         return {
             counter: 0,
             color: "purple",
-            text: "Hey"
+            text: "Hey",
+            sub: {
+                counter: 0
+            }
         }
     }
 
     styles() {
         return `
-            * {
-                margin: 0; 
-                padding: 0;
-                box-sizing: border-box;
-            }
-
             h1 {
-                position: absolute;
-                top: 50%; 
-                left: 50%;
-                transform: translate(-50%, -50%);
-
                 font-size: 100px;
                 font-family: sans-serif;
                 font-weight: 400;
@@ -33,19 +25,34 @@ Component.create("test-component", class extends Component.Element{
     }
 
     template() {
-        return `<h1>${this.data.text}</h1>`;
+        return `
+            <h1>${ this.data.text }</h1>
+            <button type="button" on:click="stopAnimation">Stop Me!</button>
+            <button type="button" on:click="info">Get my data!</button>
+        `;
     }
 
     startAnimation() {
-        setInterval(() => {
-            this.data.text = this.data.counter % 2 == 0 ? "Ho" : "Hey";
-            this.data.color = this.data.counter % 2 == 0 ? "red" : "purple";
+        this.interval = setInterval(() => {
+            this.data.text = this.data.sub.counter % 2 == 0 ? "Ho" : "Hey";
+            this.data.color = this.data.sub.counter % 2 == 0 ? "green" : "purple";
             
-            this.data.counter++;
+            this.data.sub.counter++;
         }, 1500);
+    }
+
+    info() {
+        console.log(this.data);
+    }
+
+    stopAnimation() {
+        clearInterval(this.interval);
     }
 
     rendered() {
         this.startAnimation();
+        this.watch('sub.counter', (target, value, last) => {
+            console.log(target, value, last)
+        })
     }
 });
