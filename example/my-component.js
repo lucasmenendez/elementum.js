@@ -1,8 +1,8 @@
-import Component from '../dist/component.esm.js';
+import Elementum from '../dist/elementum.esm.js';
 
 import './my-nd-component.js';
 
-Component.attach("my-component", class extends Component {
+Elementum.attach("my-component", class extends Elementum {
     data() {
         return {
             counter: 0

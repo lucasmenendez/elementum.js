@@ -1,19 +1,19 @@
 {
-	"name": "component.js",
+	"name": "elementum.js",
 	"version": "0.0.1",
 	"description": "simple Web Components library",
-	"main": "dist/component.cjs.js",
-	"module": "dist/component.esm.js",
-	"browser": "dist/component.umd.js",
+	"main": "dist/elementum.cjs.js",
+	"module": "dist/elementum.esm.js",
+	"browser": "dist/elementum.umd.js",
 	"scripts": {
-		"docs": "documentation build lib/component.js -f md -o REFERENCE.md",
+		"docs": "documentation build lib/elementum.js -f md -o REFERENCE.md",
 		"build": "NODE_ENV=production rollup -c build/rollup.config.js",
 		"dev": "rollup -w -c build/rollup.config.js",
 		"start": "npm run dev"
 	},
 	"repository": {
 		"type": "git",
-		"url": "github.com/lucasmenendez/component.js"
+		"url": "github.com/lucasmenendez/elementum.js"
 	},
 	"author": "Lucas Menendez",
 	"license": "MIT",

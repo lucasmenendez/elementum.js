@@ -8,9 +8,9 @@ let isProd = process.env.NODE_ENV === 'production';
 
 export default [
 	{
-		input: 'lib/component.js',
+		input: 'lib/elementum.js',
 		output: [
-			{ file: pkg.browser, format: 'umd', name: 'Component' },
+			{ file: pkg.browser, format: 'umd', name: 'Elementum' },
 			{ file: pkg.main, format: 'cjs' },
 		],
 		plugins: [
@@ -27,7 +27,7 @@ export default [
 		]
 	},
 	{
-		input: 'lib/component.js',
+		input: 'lib/elementum.js',
 		output: [
 			{ file: pkg.module, format: 'es' }
 		],

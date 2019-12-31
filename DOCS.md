@@ -1,4 +1,4 @@
-# Component.js Documentation
+# elementum.js Documentation
 
 ### Table of contents
 
@@ -12,28 +12,28 @@
 
 ## Installation
 ```bash
-    npm install component.js
+    npm install elementum.js
 ```
 
 ## How to use
 
-### Import Component.js
+### Import elementum.js
 
 #### As ES6 module
 
 ```javascript
-    import Component from 'component.js'
+    import Elementum from 'elementum.js'
 ```
 
 #### As JavaScript file
 
 ```html
-    <script src="/node_modules/component.js/dist/component.umd.js"></script>
+    <script src="/node_modules/elementum.js/dist/component.umd.js"></script>
 ```
 
 #### Node module syntax
 ```javascript
-    var Component = require('component.js');
+    var Elementum = require('elementum.js');
 ```
 
 ### Define your own component
@@ -48,7 +48,7 @@
 
 ##### Example
 ```javascript
-    Component.attach("my-component", class extends Component {
+    Elementum.attach("my-component", class extends Elementum {
         data() { 
             return {
                 your: "data",
@@ -75,7 +75,7 @@
 
 ##### Example
 ```javascript
-    Component.attach("my-component", class extends Component {
+    Elementum.attach("my-component", class extends Elementum {
         created() { /** Your code here */ }
         rendered() { /** Your code here */ }
         destroyed() { /** Your code here */ }
@@ -104,7 +104,7 @@ Import the component into the parent component definition (or into the HTML file
 ```javascript
     import './my-nd-component.js';
 
-    Component.attach("my-component", class extends Component {
+    Elementum.attach("my-component", class extends Elementum {
         // ...
         template() {
             return `
@@ -133,11 +133,11 @@ Import the component into the parent component definition (or into the HTML file
 - `my-component.js`
 
 ```javascript
-    import Component from 'component.js'
+    import Elementum from 'elementum.js'
 
-    import './my-nd-component.js';
+    import './my-nd-elementum.js';
 
-    Component.attach("my-component", class extends Component {
+    Elementum.attach("my-component", class extends Elementum {
         data() {
             return {
                 counter: 0
@@ -177,12 +177,12 @@ Import the component into the parent component definition (or into the HTML file
     });
 ```
 
-- `my-nd-component.js`
+- `my-nd-elementum.js`
 
 ```javascript
-    import Component from 'component.js'
+    import Elementum from 'elementum.js'
 
-    Component.attach("my-nd-component", class extends Component {
+    Elementum.attach("my-nd-component", class extends Elementum {
         data() {
             return {
                 text: "Hello from nested!"

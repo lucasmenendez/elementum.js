@@ -1,6 +1,6 @@
-![Component.js][0]
+![Elementum.js][0]
 
-# Component.js
+# Elementum.js
 
 The simplest framework to work with vanilla WebComponents.
 

@@ -1,8 +1,8 @@
-# Component.js API Reference
+# elementum.js API Reference
 
 ### Table of Contents
 
--   [Component][1]
+-   [Elementum][1]
     -   [Properties][2]
     -   [created][3]
         -   [Examples][4]
@@ -25,11 +25,11 @@
 -   [dataWatcher][21]
     -   [Parameters][22]
 
-## Component
+## Elementum
 
 **Extends HTMLElement**
 
-Component class extends a generic HTMLElement and adds some features like 
+Elementum class extends a generic HTMLElement and adds some features like 
 data binding or component lifecycle events.
 
 ### Properties
@@ -38,13 +38,13 @@ data binding or component lifecycle events.
 
 ### created
 
-Component live-cycle method called when the component is initialized. 
+Elementum live-cycle method called when the component is initialized. 
 Must be overwritten.
 
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      created() { 
          // Your code here
      }
@@ -53,14 +53,14 @@ class MainComponent extends Component {
 
 ### rendered
 
-Component live-cycle method called when the component is rendered into 
+Elementum live-cycle method called when the component is rendered into 
 the parent component or re-rendered after data change. Must be 
 overwritten.
 
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      rendered() { 
          // Your code here
      }
@@ -69,13 +69,13 @@ class MainComponent extends Component {
 
 ### destroyed
 
-Component live-cycle method called when the component is deleted from the 
+Elementum live-cycle method called when the component is deleted from the 
 parent component. Must be overwritten.
 
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      destroyed() { 
          // Your code here
      }
@@ -90,7 +90,7 @@ value of data component. Must be overwritten.
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      data() { 
          return {
              text: "world"
@@ -110,7 +110,7 @@ Must be overwritten.
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      template() { 
          return `<h1>Hello ${ this.data.text }!</h1>`;
      }
@@ -127,7 +127,7 @@ component CSS style. Reactive to changes in the component data.
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      style() { 
          return `h1 { color: red; }`;
      }
@@ -143,13 +143,13 @@ parameter provided.
 
 #### Parameters
 
--   `prop` **[string][24]** Component data prop.
+-   `prop` **[string][24]** Elementum data prop.
 -   `handler` **[dataWatcher][25]** Handler function to call when watched data changes
 
 #### Examples
 
 ```javascript
-class MainComponent extends Component {
+class MainComponent extends Elementum {
      data() {
          return {
              text: "world"
@@ -164,21 +164,21 @@ class MainComponent extends Component {
 ### attach
 
 Registers in the HTML tag provided a new WebComponent defined by the 
-class provided. The class provided must extends the [Component][1] class.
+class provided. The class provided must extends the [Elementum][1] class.
 
 #### Parameters
 
 -   `tag` **[string][24]** The HTML tag to register the new component.
--   `definition` **[Component][26]** Custom class that extends [Component][1] class.
+-   `definition` **[Elementum][26]** Custom class that extends [Elementum][1] class.
 
 #### Examples
 
 ```javascript
-class MainComponent extends Component { 
+class MainComponent extends Elementum { 
      // ...
  }
 
- Component.attach("main-component", MainComponent);
+ Elementum.attach("main-component", MainComponent);
 ```
 
 ## dataWatcher
@@ -193,7 +193,7 @@ Type: [Function][27]
 -   `value` **any** The new value of the property updated.
 -   `last` **any** The old value of the property updated.
 
-[1]: #component
+[1]: #elementum
 
 [2]: #properties
 
@@ -243,6 +243,6 @@ Type: [Function][27]
 
 [25]: #datawatcher
 
-[26]: #component
+[26]: #elementum
 
 [27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function

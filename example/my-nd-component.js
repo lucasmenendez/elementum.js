@@ -1,6 +1,6 @@
-import Component from '../dist/component.esm.js';
+import Elementum from '../dist/elementum.esm.js';
 
-Component.attach("my-nd-component", class extends Component {
+Elementum.attach("my-nd-component", class extends Elementum {
     data() {
         return {
             text: "Hello from nested!"
