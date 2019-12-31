@@ -6,7 +6,8 @@
 	"module": "dist/component.esm.js",
 	"browser": "dist/component.umd.js",
 	"scripts": {
-		"build": "rollup -c build/rollup.config.js",
+		"docs": "documentation build lib/component.js -f md -o REFERENCE.md",
+		"build": "NODE_ENV=production rollup -c build/rollup.config.js",
 		"dev": "rollup -w -c build/rollup.config.js",
 		"start": "npm run dev"
 	},
@@ -17,9 +18,15 @@
 	"author": "Lucas Menendez",
 	"license": "MIT",
 	"devDependencies": {
+		"@babel/core": "^7.7.7",
+		"@babel/plugin-transform-runtime": "^7.7.6",
+		"@babel/preset-env": "^7.7.7",
+		"@babel/runtime": "^7.7.7",
 		"rollup": "^1.27.5",
+		"rollup-plugin-babel": "^4.3.3",
 		"rollup-plugin-commonjs": "^10.1.0",
-		"rollup-plugin-node-resolve": "^5.2.0"
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-uglify": "^6.0.4"
 	},
 	"dependencies": {}
 }

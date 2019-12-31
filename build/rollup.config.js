@@ -1,26 +1,44 @@
+import pkg from '../package.json';
+import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import pkg from '../package.json';
+import { uglify } from "rollup-plugin-uglify";
+
+let isProd = process.env.NODE_ENV === 'production';
 
 export default [
 	{
-		input: 'src/component.js',
-		output: {
-			name: 'component',
-			file: pkg.browser,
-			format: 'umd'
-		},
+		input: 'lib/component.js',
+		output: [
+			{ file: pkg.browser, format: 'umd', name: 'Component' },
+			{ file: pkg.main, format: 'cjs' },
+		],
 		plugins: [
 			resolve(),
-			commonjs()
+			babel({
+				exclude: 'node_modules/**',
+				runtimeHelpers: true,
+				presets: [["@babel/preset-env"]],
+				plugins: [['@babel/transform-runtime', { useESModules: true }]],
+				babelrc: false
+			}),
+			commonjs(),
+			isProd && uglify()
 		]
 	},
 	{
-		input: 'src/component.js',
-		external: ['ms'],
+		input: 'lib/component.js',
 		output: [
-			{ file: pkg.main, format: 'cjs' },
 			{ file: pkg.module, format: 'es' }
+		],
+		plugins: [
+			resolve(),
+			babel({
+				exclude: 'node_modules/**',
+				presets: [["@babel/preset-env"]],
+				babelrc: false
+			}),
+			commonjs()
 		]
 	}
 ];
