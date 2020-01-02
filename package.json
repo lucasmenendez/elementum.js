@@ -1,6 +1,6 @@
 {
 	"name": "elementumjs",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"description": "simple Web Components library",
 	"main": "dist/elementum.cjs.js",
 	"module": "dist/elementum.esm.js",
@@ -11,11 +11,13 @@
 		"dev": "rollup -w -c build/rollup.config.js",
 		"start": "npm run dev"
 	},
+	"homepage": "https://lucasmenendez.github.io/elementum.js/",
 	"repository": {
 		"type": "git",
 		"url": "github.com/lucasmenendez/elementum.js"
 	},
-	"author": "Lucas Menendez",
+	"publishConfig": { "registry": "https://npm.pkg.github.com/" },
+	"author": "Lucas Menendez <hi@lucasmenendez.me>",
 	"license": "MIT",
 	"devDependencies": {
 		"@babel/core": "^7.7.7",
