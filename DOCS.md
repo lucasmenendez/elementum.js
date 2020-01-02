@@ -11,6 +11,7 @@
 -   [Full example][7]
 
 ## Installation
+
 ```bash
     npm install elementumjs
 ```
@@ -47,6 +48,7 @@
 | ![style](assets/style.png) | style | Component style definition. |
 
 ##### Example
+
 ```javascript
     Elementum.attach("my-component", class extends Elementum {
         data() { 
@@ -67,6 +69,7 @@
 ```
 
 #### Components life-cycle
+
 | | Name | Event fired description |
 |:---:|:----:|:----|
 | ![created](assets/created.png) | created | The component has been instantiated. |
@@ -74,6 +77,7 @@
 | ![destroyed](assets/destroyed.png) | destoyed | The component has been destroyed from the parent. |
 
 ##### Example
+
 ```javascript
     Elementum.attach("my-component", class extends Elementum {
         created() { /** Your code here */ }
@@ -182,6 +186,7 @@ Example:
 ```
 
 ## Full example
+
 - `index.html`
 
 ```html
