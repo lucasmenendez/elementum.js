@@ -1,3 +1,8 @@
+[![GitHub](https://img.shields.io/github/license/lucasmenendez/elementum.js)](LICENSE)
+[![npm](https://img.shields.io/npm/v/elementumjs)](https://www.npmjs.com/package/elementumjs)
+[![docs](https://img.shields.io/badge/docs-latest-blue)][2]
+
+
 ![Elementum.js][0]
 
 # Elementum.js
