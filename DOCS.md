@@ -7,12 +7,12 @@
     -   [Import your component][3]
     -   [Define your own component][4]
     -   [Use your component][5]
-    -   [Component events][6]
+    -   [Listen for events][6]
 -   [Full example][7]
 
 ## Installation
 ```bash
-    npm install elementum.js
+    npm install elementumjs
 ```
 
 ## How to use
@@ -22,18 +22,18 @@
 #### As ES6 module
 
 ```javascript
-    import Elementum from 'elementum.js'
+    import Elementum from 'elementumjs'
 ```
 
 #### As JavaScript file
 
 ```html
-    <script src="/node_modules/elementum.js/dist/component.umd.js"></script>
+    <script src="node_modules/elementumjs/dist/component.umd.js"></script>
 ```
 
 #### Node module syntax
 ```javascript
-    var Elementum = require('elementum.js');
+    var Elementum = require('elementumjs');
 ```
 
 ### Define your own component
@@ -116,11 +116,70 @@ Import the component into the parent component definition (or into the HTML file
     }
 ```
 
-### Component events
+### Listen for events
 
-#### Watch your data
+#### Data changes
 
-#### Listen for DOM events
+The data defined in the component declaration are observable using `watch` function:
+```javascript
+    Elementum.attach("my-component", class extends Elementum {
+        data() { 
+            return {
+                my: {
+                    nested: {
+                        text: "Hello World"
+                    }
+                }
+            }
+        }
+
+        template() { 
+            return `<h1>${this.data.my.nested.text}</h1>`;
+        }
+
+        rendered() { 
+            this.watch('my.nested.text', console.log); // prints "my.nested.text", "Bye bye!", "Hello World"
+
+            setTimeout(() => {
+                this.data.my.nested.text = "Bye bye!";
+            }, 3000 );
+        } 
+    });
+```
+
+#### DOM events
+
+The `EventListener`'s over DOM elements must be defined in `template()` response in the following format:
+
+| Default Prefix | Event Type ([read more](https://en.wikipedia.org/wiki/DOM_events)) | Definded listener |
+|:----:|:----:|:----:|
+| `on` | `click` | `btnListener` |
+
+Example:
+```javascript
+    Elementum.attach("my-component", class extends Elementum {
+        data() {
+            return {
+                counter: 0
+            }
+        }
+
+        template() {
+            return `
+                <h1>${ this.data.counter }</h1>
+                <button type="button" on:click="increaseCounter">Increase!</button>
+            `;
+        }
+
+        increaseCounter() {
+            this.data.counter++;
+        }
+
+        decreaseCounter() {
+            this.data.counter--;
+        }
+    });
+```
 
 ## Full example
 - `index.html`
@@ -133,7 +192,7 @@ Import the component into the parent component definition (or into the HTML file
 - `my-component.js`
 
 ```javascript
-    import Elementum from 'elementum.js'
+    import Elementum from 'elementumjs'
 
     import './my-nd-elementum.js';
 
@@ -180,7 +239,7 @@ Import the component into the parent component definition (or into the HTML file
 - `my-nd-elementum.js`
 
 ```javascript
-    import Elementum from 'elementum.js'
+    import Elementum from 'elementumjs'
 
     Elementum.attach("my-nd-component", class extends Elementum {
         data() {
@@ -216,6 +275,6 @@ Import the component into the parent component definition (or into the HTML file
 
 [5]: #use-your-component
 
-[6]: #component-events
+[6]: #listen-for-events
 
 [7]: #example
