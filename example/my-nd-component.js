@@ -1,5 +1,3 @@
-import Elementum from '../dist/elementum.esm.js';
-
 Elementum.attach("my-nd-component", class extends Elementum {
     data() {
         return {
