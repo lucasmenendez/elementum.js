@@ -17,7 +17,7 @@ The simplest framework to work with vanilla WebComponents.
 
 [0]: assets/logo.png
 
-[1]: #
+[1]: example/
 
 [2]: DOCS.md
 
