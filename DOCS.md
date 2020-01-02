@@ -24,12 +24,14 @@
 
 ```javascript
     import Elementum from 'elementumjs'
+    // import Elementum from 'https://unpkg.com/elementumjs/dist/elementum.esm.js'
 ```
 
 #### As JavaScript file
 
 ```html
-    <script src="node_modules/elementumjs/dist/component.umd.js"></script>
+    <script src="node_modules/elementumjs/dist/elementum.umd.js"></script>
+    <!-- <script src="https://unpkg.com/elementumjs"></script> -->
 ```
 
 #### Node module syntax
