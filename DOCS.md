@@ -1,4 +1,4 @@
-# elementum.js Documentation
+## Documentation
 
 ### Table of contents
 

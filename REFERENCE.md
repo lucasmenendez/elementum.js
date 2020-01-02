@@ -1,4 +1,4 @@
-# elementum.js API Reference
+## API Reference
 
 ### Table of Contents
 
