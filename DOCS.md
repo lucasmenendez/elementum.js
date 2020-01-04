@@ -4,7 +4,7 @@
 
 -   [Installation][1]
 -   [How to use][2]
-    -   [Import your component][3]
+    -   [Import your elementum.js][3]
     -   [Define your own component][4]
     -   [Use your component][5]
     -   [Listen for events][6]
@@ -61,11 +61,11 @@
         }
 
         template() { 
-            return `<h1>Your ${this.your} here</h1>`;
+            return `<h1>Your ${this.data.your} here</h1>`;
         }
 
-        style() { 
-            return `h1 { color: ${ this.here ? "red" : "blue" } }`;
+        styles() { 
+            return `h1 { color: ${ this.data.here ? "red" : "blue" } }`;
         }
     });
 ```
@@ -201,7 +201,7 @@ Example:
 ```javascript
     import Elementum from 'elementumjs'
 
-    import './my-nd-elementum.js';
+    import './my-nd-component.js';
 
     Elementum.attach("my-component", class extends Elementum {
         data() {
@@ -243,7 +243,7 @@ Example:
     });
 ```
 
-- `my-nd-elementum.js`
+- `my-nd-component.js`
 
 ```javascript
     import Elementum from 'elementumjs'
@@ -276,7 +276,7 @@ Example:
 
 [2]: #how-to-use
 
-[3]: #import-componentjs
+[3]: #import-elementum.js
 
 [4]: #define-your-own-component
 
