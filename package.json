@@ -16,9 +16,6 @@
 		"type": "git",
 		"url": "github.com/lucasmenendez/elementum.js"
 	},
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	},
 	"author": "Lucas Menendez <hi@lucasmenendez.me>",
 	"license": "MIT",
 	"devDependencies": {
