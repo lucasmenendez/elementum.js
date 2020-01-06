@@ -1,6 +1,6 @@
 {
 	"name": "elementumjs",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "simple Web Components library",
 	"main": "dist/elementum.cjs.js",
 	"module": "dist/elementum.esm.js",

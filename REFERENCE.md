@@ -18,12 +18,17 @@
         -   [Examples][14]
     -   [watch][15]
         -   [Parameters][16]
-        -   [Examples][17]
-    -   [attach][18]
-        -   [Parameters][19]
-        -   [Examples][20]
--   [dataWatcher][21]
-    -   [Parameters][22]
+    -   [watchData][17]
+        -   [Parameters][18]
+        -   [Examples][19]
+    -   [watchAttr][20]
+        -   [Parameters][21]
+        -   [Examples][22]
+    -   [attach][23]
+        -   [Parameters][24]
+        -   [Examples][25]
+-   [watcher][26]
+    -   [Parameters][27]
 
 ## Elementum
 
@@ -34,7 +39,7 @@ data binding or component lifecycle events.
 
 ### Properties
 
--   `data` **[Object][23]** Contains the component data defined by user.
+-   `data` **[Object][28]** Contains the component data defined by user.
 
 ### created
 
@@ -99,7 +104,7 @@ class MainComponent extends Elementum {
  });
 ```
 
-Returns **[Object][23]** Observable data initial value.
+Returns **[Object][28]** Observable data initial value.
 
 ### template
 
@@ -117,7 +122,7 @@ class MainComponent extends Elementum {
  });
 ```
 
-Returns **[string][24]** Observable data initial value.
+Returns **[string][29]** Observable data initial value.
 
 ### style
 
@@ -134,17 +139,34 @@ class MainComponent extends Elementum {
  });
 ```
 
-Returns **[string][24]** Observable data initial value.
+Returns **[string][29]** Observable data initial value.
 
 ### watch
+
+-   **See: [watchData][30]**
 
 Register a change handler to the current component data property by 
 parameter provided.
 
 #### Parameters
 
--   `prop` **[string][24]** Elementum data prop.
--   `handler` **[dataWatcher][25]** Handler function to call when watched data changes
+-   `prop` **[string][29]** Elementum data prop.
+-   `handler` **[watcher][31]** Handler function to call when watched data changes
+
+**Meta**
+
+-   **deprecated**: since version 0.2.0
+
+
+### watchData
+
+Register a change handler to the current component data property by 
+parameter provided.
+
+#### Parameters
+
+-   `prop` **[string][29]** Elementum data prop.
+-   `handler` **[watcher][31]** Handler function to call when watched data changes
 
 #### Examples
 
@@ -156,7 +178,34 @@ class MainComponent extends Elementum {
          }
      }
      rendered() {
-         this.watch("text", console.log); // prints: prop, value, last
+         this.watchData("text", console.log); // prints: prop, value, last
+     }
+ }
+```
+
+### watchAttr
+
+Register a change handler to the current component attribute by 
+parameter provided.
+
+#### Parameters
+
+-   `attr` **[string][29]** Elementum attribute name.
+-   `handler` **[watcher][31]** Handler function to call when watched data changes
+
+#### Examples
+
+```javascript
+class ChildComponent extends Elementum {
+     static get observedAttributes() {
+         return [ "data-test" ];
+     }
+
+     template() {
+         return `<h1>${ this.attrs['data-test'] }</h1>`
+     }
+     rendered() {
+         this.watchAttr("data-test", console.log); // prints: prop, value, last
      }
  }
 ```
@@ -168,8 +217,8 @@ class provided. The class provided must extends the [Elementum][1] class.
 
 #### Parameters
 
--   `tag` **[string][24]** The HTML tag to register the new component.
--   `definition` **[Elementum][26]** Custom class that extends [Elementum][1] class.
+-   `tag` **[string][29]** The HTML tag to register the new component.
+-   `definition` **[Elementum][32]** Custom class that extends [Elementum][1] class.
 
 #### Examples
 
@@ -181,15 +230,15 @@ class MainComponent extends Elementum {
  Elementum.attach("main-component", MainComponent);
 ```
 
-## dataWatcher
+## watcher
 
 The callback function to execute when observed data changes.
 
-Type: [Function][27]
+Type: [Function][33]
 
 ### Parameters
 
--   `prop` **[string][24]** Breadcrumb of target property updated.
+-   `prop` **[string][29]** Breadcrumb of target property updated.
 -   `value` **any** The new value of the property updated.
 -   `last` **any** The old value of the property updated.
 
@@ -225,24 +274,36 @@ Type: [Function][27]
 
 [16]: #parameters
 
-[17]: #examples-6
+[17]: #watchdata
 
-[18]: #attach
+[18]: #parameters-1
 
-[19]: #parameters-1
+[19]: #examples-6
 
-[20]: #examples-7
+[20]: #watchattr
 
-[21]: #datawatcher
+[21]: #parameters-2
 
-[22]: #parameters-2
+[22]: #examples-7
 
-[23]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[23]: #attach
 
-[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[24]: #parameters-3
 
-[25]: #datawatcher
+[25]: #examples-8
 
-[26]: #elementum
+[26]: #watcher
 
-[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[27]: #parameters-4
+
+[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[30]: watchData
+
+[31]: #watcher
+
+[32]: #elementum
+
+[33]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
