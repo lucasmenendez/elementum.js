@@ -8,7 +8,8 @@
     -   [Define your own component][4]
     -   [Use your component][5]
     -   [Listen for events][6]
--   [Full example][7]
+    -   [Component communication][7]
+-   [Full example][8]
 
 ## Installation
 
@@ -187,6 +188,13 @@ Example:
     });
 ```
 
+### Component communication
+
+### Child to parent
+
+### Parent to child
+
+
 ## Full example
 
 - `index.html`
@@ -284,4 +292,6 @@ Example:
 
 [6]: #listen-for-events
 
-[7]: #example
+[7]: #component-communication
+
+[8]: #example
