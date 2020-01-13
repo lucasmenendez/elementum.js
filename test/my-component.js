@@ -3,7 +3,10 @@ import './my-nd-component.js';
 Elementum.attach("my-component", class extends Elementum {
     data() {
         return {
-            counter: 0
+            counter: 0,
+            childData: {
+                counter: 0
+            }
         }
     }
 
@@ -18,23 +21,20 @@ Elementum.attach("my-component", class extends Elementum {
 
     template() {
         return `
-            <h1>${ this.data.counter }</h1>
+            <h1>${ this.data.childData.counter }</h1>
             <button type="button" on:click="increaseCounter">Increase!</button>
-            <button type="button" on:click="decreaseCounter">Decrease!</button>
-
-            <my-nd-component data-test="${ this.data.counter }"></my-nd-component>
+            <my-nd-component id="test" :counter="childData.counter"></my-nd-component>
         `;
     }
 
     increaseCounter() {
-        this.data.counter++;
+        this.data.childData.counter++;
     }
 
-    decreaseCounter() {
-        this.data.counter--;
-    }
 
     rendered() {
-        // this.watch('counter', console.log);
+        this.document.querySelector("#test").watchAttr('counter', (prop, val, _) => {
+            this.data.childData.counter = val;
+        });
     }
 });

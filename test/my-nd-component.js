@@ -1,8 +1,4 @@
 Elementum.attach("my-nd-component", class extends Elementum {
-    static get observedAttributes() {
-        return ["data-test"];
-    }
-
     data() {
         return {
             text: "Hello from nested!"
@@ -18,17 +14,14 @@ Elementum.attach("my-nd-component", class extends Elementum {
         `;
     }
 
-    created() {
-
-    }
-
     template() {
         return `
-            <h2>${ this.data.text }</h1>
+            <h2>${ this.data.text }</h2>
+            <button type="button" on:click="decreaseCounter">Decrease!</button>
         `;
     }
 
-    rendered() {
-        this.watchAttr('data-test', console.log);
+    decreaseCounter() {
+        this.attrs.counter--;
     }
 });
