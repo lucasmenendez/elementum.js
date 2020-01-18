@@ -68,10 +68,14 @@ Type: [Array][35]&lt;[Elementum][36]>
 
 The function checks if attribute provided contains a reference to parent 
 data to get from it the value. If that is not the case, return raw value.
+If attribute provided does not exist, raise an error.
+Then casts the value to its defined type. If the type provided is not 
+supported, raise an error.
 
 #### Parameters
 
--   `attr` **any** 
+-   `name` **any** Attribute name
+-   `type` **any** Defined attribute type
 
 ### created
 

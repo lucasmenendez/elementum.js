@@ -198,7 +198,11 @@ Example:
 
 ##### Attributes definition
 
-[WIP]
+Attributes are defined with its tag and its type. Only defined attributes are observables from current component and others. The types suported are:
+ * `Number`
+ * `String`
+ * `Boolean`
+ * `Object` 
 
 ```javascript
     Elementum.attach("my-nd-component", class extends Elementum {
@@ -254,16 +258,16 @@ Initial values of child attributes can be provided when the chid component is in
     });
 ```
 
-##### Static vs. Connected attributes
+##### Raw values vs. Referenced data attributes
 
 You can pass value to child attributes in two ways. 
- * The **static** values are setted at the beginning and if parent update it,the child will not react.
+ * **Raw** attributes value are assigned using the value provided casted according to the type defined.
 
 ```javascript
         return `<my-nd-component id="child" myAttr="${ this.data.attrValue }" />`;
 ```
 
- * The **connected** values starts with `:`, and initialize the child attr with the current value of data, and when the data is updated, the change is propagated to the child.
+ * The **referenced data** attributes are defined with `:` at the begining of the tag. This attributes get the value from parent data by reference provided as attribute value
 
 ```javascript
         return `<my-nd-component id="child" :myAttr="attrValue" />`;
