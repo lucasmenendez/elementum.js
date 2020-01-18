@@ -23,7 +23,7 @@ Elementum.attach("my-component", class extends Elementum {
         return `
             <h1>${ this.data.childData.counter }</h1>
             <button type="button" on:click="increaseCounter">Increase!</button>
-            <my-nd-component id="test" :counter="childData.counter"></my-nd-component>
+            <my-nd-component id="test" :counter="childData.counter" />
         `;
     }
 

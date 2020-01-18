@@ -21,6 +21,10 @@ Elementum.attach("my-nd-component", class extends Elementum {
         `;
     }
 
+    rendered() { console.log("rendered"); }
+    created() { console.log("created"); }
+    destroyed() { console.log("destroyed"); }
+
     decreaseCounter() {
         this.attrs.counter--;
     }

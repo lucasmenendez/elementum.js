@@ -190,9 +190,101 @@ Example:
 
 ### Component communication
 
-### Child to parent
+<p align="center">
+    <img src="assets/component-communication.png" width=600>
+</p>
 
-### Parent to child
+#### Working with child attributes
+
+##### Attributes definition
+
+[WIP]
+
+```javascript
+    Elementum.attach("my-nd-component", class extends Elementum {
+        attrs() {
+            return {
+                myAttr: String
+            }
+        }
+    });
+```
+
+##### Attributes access and update
+
+Child component has accesible the defined attributes throw its owm property `this.attrs` with the assigned name and type:
+
+```javascript
+    Elementum.attach("my-nd-component", class extends Elementum {
+        rendered() {
+            console.log(this.attrs.myAttr, typeof this.attrs.myAttr);
+        }
+    });
+```
+
+#### Using on parent component
+
+##### Initial values
+
+Initial values of child attributes can be provided when the chid component is instantiated:
+
+```javascript
+    import './my-nd-component.js';
+
+    Elementum.attach("my-component", class extends Elementum {
+        data() {
+            return {
+                attrValue: "Hello World"
+            }
+        }
+
+        template() {
+            return `
+                <my-nd-component id="child" :myAttr="attrValue" />
+            `;
+        }
+        rendered() {
+            let child = this.document.querySelector("#child");
+            console.log(child.attrs.counter);
+
+            child.watchAttr('counter', (prop, val, _) => {
+                this.data.counter = val;
+            });
+        }
+    });
+```
+
+##### Static vs. Connected attributes
+
+You can pass value to child attributes in two ways. 
+ * The **static** values are setted at the beginning and if parent update it,the child will not react.
+
+```javascript
+        return `<my-nd-component id="child" myAttr="${ this.data.attrValue }" />`;
+```
+
+ * The **connected** values starts with `:`, and initialize the child attr with the current value of data, and when the data is updated, the change is propagated to the child.
+
+```javascript
+        return `<my-nd-component id="child" :myAttr="attrValue" />`;
+```
+
+##### Watch child attributes
+
+Parent component has access to child attributes and can assign watchers to it:
+
+```javascript
+    Elementum.attach("my-component", class extends Elementum {
+        rendered() {
+            let child = this.document.querySelector("#child");
+            console.log(child.attrs.counter);
+
+            child.watchAttr('counter', (prop, val, _) => {
+                this.data.counter = val;
+            });
+        }
+    });
+```
 
 
 ## Full example
