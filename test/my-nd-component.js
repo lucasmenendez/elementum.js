@@ -1,17 +1,25 @@
-Elementum.attach("my-nd-component", class extends Elementum {
-    attrs() {
+import { Elementum, html } from '../dist/elementum.esm.js'
+
+class Child extends Elementum {
+    static get attrs() {
         return {
-            counter: Object
+            counter: Number
         }
     }
 
     template() {
-        return `
+        return html`
             <button type="button" on:click="decreaseCounter">Decrease!</button>
         `;
     }
 
-    decreaseCounter() {
-        this.attrs.counter.current--;
+    rendered() {
+        this.watchAttr('counter', console.log);
     }
-});
+
+    decreaseCounter() {
+        this.attrs.counter--;
+    }
+}
+
+Elementum.attach("my-nd-component", Child);

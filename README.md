@@ -9,6 +9,8 @@
 
 The simplest framework to work with vanilla WebComponents.
 
+⚠️ Under development library. Do not use it in production projects. ⚠️
+
 [Live demo][1] | [Documentation][2] | [API Reference][3]
 
 ---
